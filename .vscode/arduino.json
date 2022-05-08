@@ -2,5 +2,5 @@
     "configuration": "cpu=atmega328",
     "board": "arduino:avr:nano",
     "programmer": "arduino:avrisp",
-    "sketch": "tests\\mpu6050\\mpu6050.ino"
+    "sketch": "src\\logger\\logger.ino"
 }
