@@ -18,7 +18,7 @@ void initSDCard() {
 // Write Content to SD Card
 void write2SDCard(String filename, String content) {
     // Turn on Activity LED
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(ACTIVITY_LED_PIN, HIGH);
 
     // Initialize File Object
     File file = SD.open(filename, FILE_WRITE);
@@ -42,13 +42,13 @@ void write2SDCard(String filename, String content) {
     }
 
     // Turn off Activity LED
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(ACTIVITY_LED_PIN, LOW);
 }
 
 // Function to read file counters from counter.txt
 char getFileCounter() {
     // Turn on Activity LED
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(ACTIVITY_LED_PIN, HIGH);
 
     // Return File Int String
     int count = 0;
@@ -74,7 +74,7 @@ char getFileCounter() {
     }
 
     // Turn off Activity LED
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(ACTIVITY_LED_PIN, LOW);
 
     return count;
 }

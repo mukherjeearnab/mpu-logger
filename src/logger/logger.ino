@@ -1,5 +1,6 @@
 // WRITE ENABLE PIN number
 const int WRITE_ENABLE_PIN = 7;
+const int ACTIVITY_LED_PIN = 8;
 
 // Reading and writing globals
 String filename = "default.csv";
@@ -11,10 +12,10 @@ void setup() {
     Serial.begin(115200);
 
     // Set Activity Pin
-    pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(ACTIVITY_LED_PIN, OUTPUT);
 
     // Set Write Enable Pin
-    pinMode(LED_BUILTIN, INPUT);
+    pinMode(WRITE_ENABLE_PIN, INPUT);
 
     // Initialize SD Card
     initSDCard();
