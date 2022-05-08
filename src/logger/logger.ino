@@ -2,6 +2,7 @@
 const int WRITE_ENABLE_PIN = 7;
 
 // Reading and writing globals
+String filename = "default.csv";
 float readings[6];
 char csvString[100];
 
@@ -21,8 +22,16 @@ void setup() {
     // Initialize MPU6050
     initMPU6050();
 
+    // Get File counter to determine filename
+    int counter = getFileCounter();
+
+    filename = String(counter) + ".csv";
+
+    // Update Counter File
+    write2SDCard("counter.txt", String(++counter));
+
     // Write CSV Headers to SD Card
-    write2SDCard("test.csv", "timestamp,ax,ay,az,gx,gy,gz\n");
+    write2SDCard(filename, "timestamp,ax,ay,az,gx,gy,gz\n");
 }
 
 // LOOP method
@@ -38,7 +47,7 @@ void loop() {
 
     // If Writing is enabled, write to the CSV
     if (digitalRead(WRITE_ENABLE_PIN) == HIGH)
-        write2SDCard("test.csv", csvString);
+        write2SDCard(filename, csvString);
     else
         Serial.print("Writing to SD card Disabled!");
 

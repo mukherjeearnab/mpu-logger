@@ -44,3 +44,37 @@ void write2SDCard(String filename, String content) {
     // Turn off Activity LED
     digitalWrite(LED_BUILTIN, LOW);
 }
+
+// Function to read file counters from counter.txt
+char getFileCounter() {
+    // Turn on Activity LED
+    digitalWrite(LED_BUILTIN, HIGH);
+
+    // Return File Int String
+    int count = 0;
+
+    // Initialize File Object
+    File file = SD.open("counter.txt", FILE_WRITE);
+
+    // if the file opened okay, write to it:
+    if (file) {
+        Serial.println("Reading Counter.");
+
+        // read the first byte / character from the counter file
+        if (file.available()) {
+            count = int(file.read());
+        }
+
+        // close the file:
+        file.close();
+
+    } else {
+        // if the file didn't open, print error:
+        Serial.print("Error opening counter.txt ");
+    }
+
+    // Turn off Activity LED
+    digitalWrite(LED_BUILTIN, LOW);
+
+    return count;
+}
