@@ -30,3 +30,18 @@ void initMPU6050() {
 
     Serial.println("MPU6050 initialization done.");
 }
+
+// Get MPU6050 readings
+void getMPU6050Reading() {
+    /* Get new sensor events with the readings */
+    sensors_event_t a, g, temp;
+    mpu.getEvent(&a, &g, &temp);
+
+    // Populate Sensor Reading
+    readings[0] = a.acceleration.x;
+    readings[1] = a.acceleration.y;
+    readings[2] = a.acceleration.z;
+    readings[3] = g.gyro.x;
+    readings[4] = g.gyro.y;
+    readings[5] = g.gyro.z;
+}
