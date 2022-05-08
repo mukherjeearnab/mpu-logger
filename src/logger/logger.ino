@@ -7,6 +7,8 @@ char csvString[100];
 
 // Setup Method
 void setup() {
+    Serial.begin(115200);
+
     // Set Activity Pin
     pinMode(LED_BUILTIN, OUTPUT);
 
