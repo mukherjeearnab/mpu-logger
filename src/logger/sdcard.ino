@@ -54,7 +54,7 @@ char getFileCounter() {
     int count = 0;
 
     // Initialize File Object
-    File file = SD.open("counter.txt", FILE_WRITE);
+    File file = SD.open("counter.txt");
 
     // if the file opened okay, write to it:
     if (file) {
