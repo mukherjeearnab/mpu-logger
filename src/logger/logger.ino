@@ -63,5 +63,5 @@ void loop() {
 // Generate MPU6050 readings as CSV String
 void getCSVOutput(float* readings) {
     // fstring '%d,%02f,%02f,%02f,%02f,%02f,%02f\n'
-    sprintf(csvString, "%d,%02f,%02f,%02f,%02f,%02f,%02f\n", micros(), readings[0], readings[1], readings[2], readings[3], readings[4], readings[5]);
+    sprintf(csvString, "%d,%02f,%02f,%02f,%02f,%02f,%02f\n", millis(), readings[0], readings[1], readings[2], readings[3], readings[4], readings[5]);
 }
