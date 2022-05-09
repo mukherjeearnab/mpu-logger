@@ -25,7 +25,7 @@ void setup() {
 
     // Get File counter to determine filename
     int counter = getFileCounter();
-    counter = counter - 48;
+    counter = (counter > 0) ? counter - 48 : 0;
 
     filename = String(counter) + ".csv";
 
