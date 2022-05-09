@@ -24,12 +24,15 @@ void setup() {
     initMPU6050();
 
     // Get File counter to determine filename
-    int counter = getFileCounter();
-    counter = (counter > 0) ? counter - 48 : 0;
+    char counter = getFileCounter();
+    counter = (counter == '[') ? 'A' : counter;
 
     filename = String(counter) + ".csv";
 
     // Update Counter File
+    // 1. Remove Counter File
+    removeFile("count");
+    // 2. Write latest count to file
     write2SDCard("count", String(++counter));
 
     // Write CSV Headers to SD Card

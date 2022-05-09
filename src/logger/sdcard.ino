@@ -51,7 +51,7 @@ char getFileCounter() {
     digitalWrite(ACTIVITY_LED_PIN, HIGH);
 
     // Return File Int String
-    int count = 0;
+    char count = 'A';  // character 'A'
 
     // Initialize File Object
     File file = SD.open("count");
@@ -62,7 +62,7 @@ char getFileCounter() {
 
         // read the first byte / character from the counter file
         if (file.available()) {
-            count = int(file.read());
+            count = char(file.read());
         }
 
         // close the file:
@@ -77,4 +77,14 @@ char getFileCounter() {
     digitalWrite(ACTIVITY_LED_PIN, LOW);
 
     return count;
+}
+
+// Remove / delete a from from SD Card
+void removeFile(String filename) {
+    Serial.print("D-> ");
+    Serial.println(filename);
+
+    SD.remove(filename);
+
+    Serial.println("Done");
 }
