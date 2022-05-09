@@ -15,7 +15,7 @@ void setup() {
     pinMode(ACTIVITY_LED_PIN, OUTPUT);
 
     // Set Write Enable Pin
-    pinMode(WRITE_ENABLE_PIN, INPUT);
+    pinMode(WRITE_ENABLE_PIN, INPUT_PULLUP);
 
     // Initialize SD Card
     initSDCard();
@@ -47,7 +47,7 @@ void loop() {
     Serial.print(csvString);
 
     // If Writing is enabled, write to the CSV
-    if (digitalRead(WRITE_ENABLE_PIN) == HIGH)
+    if (digitalRead(WRITE_ENABLE_PIN) == LOW)
         write2SDCard(filename, csvString);
     else
         Serial.print("Write Disabled!");
