@@ -25,6 +25,7 @@ void setup() {
 
     // Get File counter to determine filename
     int counter = getFileCounter();
+    counter = counter - 48;
 
     filename = String(counter) + ".csv";
 
@@ -50,7 +51,7 @@ void loop() {
     if (digitalRead(WRITE_ENABLE_PIN) == LOW)
         write2SDCard(filename, csvString);
     else
-        Serial.print("Write Disabled!");
+        Serial.println("Write Disabled!");
 
     // Sleep for 25ms
     delay(25);
