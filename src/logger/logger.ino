@@ -3,9 +3,9 @@ const int WRITE_ENABLE_PIN = 7;
 const int ACTIVITY_LED_PIN = 8;
 
 // Reading and writing globals
-String filename = "default.csv";
+String filename = "def.csv";
 float readings[6];
-char csvString[100];
+char csvString[64];
 
 // Setup Method
 void setup() {
@@ -29,10 +29,10 @@ void setup() {
     filename = String(counter) + ".csv";
 
     // Update Counter File
-    write2SDCard("counter.txt", String(++counter));
+    write2SDCard("count", String(++counter));
 
     // Write CSV Headers to SD Card
-    write2SDCard(filename, "timestamp,ax,ay,az,gx,gy,gz\n");
+    write2SDCard(filename, "ts,ax,ay,az,gx,gy,gz\n");
 }
 
 // LOOP method
@@ -50,7 +50,7 @@ void loop() {
     if (digitalRead(WRITE_ENABLE_PIN) == HIGH)
         write2SDCard(filename, csvString);
     else
-        Serial.print("Writing to SD card Disabled!");
+        Serial.print("Write Disabled!");
 
     // Sleep for 25ms
     delay(25);

@@ -5,14 +5,14 @@
 // SD Card initialization
 void initSDCard() {
     // Initialize SD Card
-    Serial.println("Initializing SD Card.");
+    Serial.println("SDC init.");
     if (!SD.begin(10)) {
-        Serial.println("SD Card initialization failed!");
+        Serial.println("Init. failed!");
         while (1)
             ;
     }
 
-    Serial.println("SD Card initialization done.");
+    Serial.println("Init. Succ");
 }
 
 // Write Content to SD Card
@@ -25,7 +25,7 @@ void write2SDCard(String filename, String content) {
 
     // if the file opened okay, write to it:
     if (file) {
-        Serial.print("Writing to ");
+        Serial.print("W-> ");
         Serial.println(filename);
 
         // Write to the file
@@ -34,10 +34,10 @@ void write2SDCard(String filename, String content) {
         // close the file:
         file.close();
 
-        Serial.println("Done writing to file.");
+        Serial.println("Done");
     } else {
         // if the file didn't open, print error:
-        Serial.print("Error opening file ");
+        Serial.print("Error! ");
         Serial.println(filename);
     }
 
@@ -45,7 +45,7 @@ void write2SDCard(String filename, String content) {
     digitalWrite(ACTIVITY_LED_PIN, LOW);
 }
 
-// Function to read file counters from counter.txt
+// Function to read file counters from  file 'count'
 char getFileCounter() {
     // Turn on Activity LED
     digitalWrite(ACTIVITY_LED_PIN, HIGH);
@@ -54,11 +54,11 @@ char getFileCounter() {
     int count = 0;
 
     // Initialize File Object
-    File file = SD.open("counter.txt");
+    File file = SD.open("count");
 
     // if the file opened okay, write to it:
     if (file) {
-        Serial.println("Reading Counter.");
+        Serial.println("R-> count");
 
         // read the first byte / character from the counter file
         if (file.available()) {
@@ -70,7 +70,7 @@ char getFileCounter() {
 
     } else {
         // if the file didn't open, print error:
-        Serial.print("Error opening counter.txt ");
+        Serial.print("Error count!");
     }
 
     // Turn off Activity LED

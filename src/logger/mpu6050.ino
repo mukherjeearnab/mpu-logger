@@ -8,16 +8,16 @@ Adafruit_MPU6050 mpu;
 
 // Initialize MPU6050
 void initMPU6050() {
-    Serial.println("Initializing MPU6050.");
+    Serial.println("MPU init.");
 
     // Try to initialize!
     if (!mpu.begin()) {
-        Serial.println("MPU6050 initialization failed!");
+        Serial.println("Init. failed!");
         while (1) {
             delay(10);
         }
     }
-    Serial.println("Found MPU6050.");
+    // Serial.println("Found MPU6050.");
 
     // set accelerometer range to +-8G
     mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
@@ -28,7 +28,7 @@ void initMPU6050() {
     // set filter bandwidth to 21 Hz
     mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
 
-    Serial.println("MPU6050 initialization done.");
+    Serial.println("Init. Succ");
 }
 
 // Get MPU6050 readings
