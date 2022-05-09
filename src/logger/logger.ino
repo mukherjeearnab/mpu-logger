@@ -5,7 +5,7 @@ const int ACTIVITY_LED_PIN = 8;
 // Reading and writing globals
 String filename = "def.csv";
 float readings[6];
-char csvString[64];
+String csvString;
 
 // Setup Method
 void setup() {
@@ -62,6 +62,11 @@ void loop() {
 
 // Generate MPU6050 readings as CSV String
 void getCSVOutput(float* readings) {
-    // fstring '%d,%02f,%02f,%02f,%02f,%02f,%02f\n'
-    sprintf(csvString, "%d,%02f,%02f,%02f,%02f,%02f,%02f\n", millis(), readings[0], readings[1], readings[2], readings[3], readings[4], readings[5]);
+    csvString = String(millis()) + "," +
+                String(readings[0]) + "," +
+                String(readings[1]) + "," +
+                String(readings[2]) + "," +
+                String(readings[3]) + "," +
+                String(readings[4]) + "," +
+                String(readings[5]) + "\n";
 }
