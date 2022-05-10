@@ -24,16 +24,14 @@ void setup() {
     initMPU6050();
 
     // Get File counter to determine filename
-    char counter = getFileCounter();
-    counter = (counter == '[') ? 'A' : counter;
-
-    filename = String(counter) + ".csv";
+    int counter = getFileCounter();
+    getFileName(counter);
 
     // Update Counter File
     // 1. Remove Counter File
     removeFile("count");
     // 2. Write latest count to file
-    write2SDCard("count", String(++counter));
+    write2SDCard("count", incrementCounter(counter));
 
     // Write CSV Headers to SD Card
     write2SDCard(filename, "ts,ax,ay,az,gx,gy,gz\n");
@@ -73,4 +71,32 @@ void getCSVOutput(float* readings) {
                 String(readings[3]) + "," +
                 String(readings[4]) + "," +
                 String(readings[5]) + "\n";
+}
+
+// Generate filename from counter integer
+void getFileName(int counter) {
+    // Seperate 0th and 1st characters
+    char c0 = char(counter % 100);
+    char c1 = char(counter / 100);
+
+    // Create the filename
+    filename = String(c1) + String(c0) + String(".csv");
+}
+
+// Increment file counter
+String incrementCounter(int counter) {
+    // Seperate 0th and 1st characters
+    char c0 = char(counter % 100);
+    char c1 = char(counter / 100);
+
+    c0++;
+    if (c0 == '[') {
+        c1++;
+        c0 = 'A';
+    }
+
+    if (c1 == '[')
+        c1 = 'A';
+
+    return String(c1) + String(c0);
 }

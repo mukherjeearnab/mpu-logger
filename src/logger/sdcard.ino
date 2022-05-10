@@ -46,12 +46,12 @@ void write2SDCard(String filename, String content) {
 }
 
 // Function to read file counters from  file 'count'
-char getFileCounter() {
+int getFileCounter() {
     // Turn on Activity LED
     digitalWrite(ACTIVITY_LED_PIN, HIGH);
 
     // Return File Int String
-    char count = 'A';  // character 'A'
+    int count = 6565;  // character 'A'
 
     // Initialize File Object
     File file = SD.open("count");
@@ -62,7 +62,11 @@ char getFileCounter() {
 
         // read the first byte / character from the counter file
         if (file.available()) {
-            count = char(file.read());
+            count = int(file.read()) * 100;
+        }
+
+        if (file.available()) {
+            count += int(file.read());
         }
 
         // close the file:
