@@ -1,3 +1,6 @@
+#include <SD.h>
+#include <SPI.h>
+
 // WRITE ENABLE PIN number
 const int WRITE_ENABLE_PIN = 7;
 const int ACTIVITY_LED_PIN = 8;
@@ -6,6 +9,8 @@ const int ACTIVITY_LED_PIN = 8;
 String filename = "def.csv";
 float readings[6];
 String csvString;
+File csvFile;
+int closeFile = -1;
 
 // Setup Method
 void setup() {
@@ -35,6 +40,9 @@ void setup() {
 
     // Write CSV Headers to SD Card
     write2SDCard(filename, "ts,ax,ay,az,gx,gy,gz\n");
+
+    // Initialize Global CSV File Object (for Open Write)
+    csvFile = SD.open(filename, FILE_WRITE);
 }
 
 // LOOP method
@@ -49,10 +57,18 @@ void loop() {
     Serial.print(csvString);
 
     // If Writing is enabled, write to the CSV
-    if (digitalRead(WRITE_ENABLE_PIN) == LOW)
-        write2SDCard(filename, csvString);
-    else
+    if (digitalRead(WRITE_ENABLE_PIN) == LOW) {
+        openWrite(csvString);
+        closeFile = 1;
+    } else {
+        if (closeFile == 1) {
+            closeOWF();
+            Serial.println("File Closed!");
+        }
+        if (closeFile != -1)
+            closeFile = 0;
         Serial.println("Write Disabled!");
+    }
 
     // Sleep for 25ms
     delay(25);
@@ -99,4 +115,33 @@ String incrementCounter(int counter) {
         c1 = 'A';
 
     return String(c1) + String(c0);
+}
+
+// Write Reading Content to SD Card (Open Write) -> should be faster
+void openWrite(String content) {
+    // Turn on Activity LED
+    digitalWrite(ACTIVITY_LED_PIN, HIGH);
+
+    // if the file opened okay, write to it:
+    if (csvFile) {
+        Serial.print("W-> ");
+        Serial.println(filename);
+
+        // Write to the file
+        csvFile.print(content);
+        Serial.println("Done");
+    } else {
+        // if the file didn't open, print error:
+        Serial.print("OW Error! ");
+        Serial.println(filename);
+    }
+
+    // Turn off Activity LED
+    digitalWrite(ACTIVITY_LED_PIN, LOW);
+}
+
+// Close Open Write File
+void closeOWF() {
+    // close the file:
+    csvFile.close();
 }

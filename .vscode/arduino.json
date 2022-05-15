@@ -1,6 +1,7 @@
 {
     "configuration": "cpu=atmega328",
     "board": "arduino:avr:nano",
-    "programmer": "arduino:avrisp",
-    "sketch": "src\\logger\\logger.ino"
+    "programmer": "arduino:avrispmkii",
+    "sketch": "src\\logger\\logger.ino",
+    "port": "COM5"
 }

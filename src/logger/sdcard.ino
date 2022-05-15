@@ -1,6 +1,5 @@
 // SD Card dependencies
-#include <SD.h>
-#include <SPI.h>
+// #include <SD.h>
 
 // SD Card initialization
 void initSDCard() {
